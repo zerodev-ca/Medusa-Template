@@ -248,3 +248,5 @@ When developing official or commercial Medusa modules, follow these architecture
 
 Full developer documentation and internal API specifications are available at:
 [https://zerodev.ca/docs/medusa/developer-documentation](https://zerodev.ca/docs/medusa/developer-documentation)
+
+NOTE: This module template was created by ai, if there are any mistakes; please report them in our Discord server! Thanks a bunch.
