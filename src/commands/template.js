@@ -1,5 +1,16 @@
 import { Commands } from "#medusa/modules";
-import { MessageFlags } from "discord.js";
+import {
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    StringSelectMenuBuilder,
+    ChannelSelectMenuBuilder,
+    ChannelType,
+    ModalBuilder,
+    TextInputBuilder,
+    TextInputStyle,
+    MessageFlags
+} from "discord.js";
 
 export class TemplateCommand extends Commands {
     constructor(medusa) {
@@ -58,6 +69,16 @@ export class TemplateCommand extends Commands {
                             autocomplete: true
                         }
                     ]
+                },
+                {
+                    name: "components",
+                    description: "Demonstrate Discord buttons and select menu components.",
+                    type: "subcommand"
+                },
+                {
+                    name: "modal",
+                    description: "Open an interactive Discord modal form.",
+                    type: "subcommand"
                 }
             ]
         });
@@ -86,8 +107,44 @@ export class TemplateCommand extends Commands {
         const allowed = await this.medusa.permissions.guard(interaction, this.getName());
         if (!allowed) return;
 
-        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
         const subcommand = interaction.options.getSubcommand();
+
+        if (subcommand === "modal") {
+            const modal = new ModalBuilder()
+                .setCustomId("medusa:modal:template:submit:create")
+                .setTitle("Register Template Item");
+
+            const idInput = new TextInputBuilder()
+                .setCustomId("identifier")
+                .setLabel("Item Identifier")
+                .setPlaceholder("e.g. bundle_starter")
+                .setStyle(TextInputStyle.Short)
+                .setRequired(true);
+
+            const nameInput = new TextInputBuilder()
+                .setCustomId("name")
+                .setLabel("Display Name")
+                .setPlaceholder("e.g. Starter Pack")
+                .setStyle(TextInputStyle.Short)
+                .setRequired(true);
+
+            const quantityInput = new TextInputBuilder()
+                .setCustomId("quantity")
+                .setLabel("Initial Stock Quantity")
+                .setPlaceholder("e.g. 25")
+                .setStyle(TextInputStyle.Short)
+                .setRequired(false);
+
+            modal.addComponents(
+                new ActionRowBuilder().addComponents(idInput),
+                new ActionRowBuilder().addComponents(nameInput),
+                new ActionRowBuilder().addComponents(quantityInput)
+            );
+
+            return interaction.showModal(modal);
+        }
+
+        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
         const handler = this.medusa.modules.handlers.get(this.module, "items");
 
         switch (subcommand) {
@@ -151,6 +208,59 @@ export class TemplateCommand extends Commands {
                         embeds: [this.medusa.embeds.error(error.message)]
                     });
                 }
+            }
+            case "components": {
+                const buttonRow = new ActionRowBuilder().addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("medusa:button:template:primary:action")
+                        .setLabel("Primary Action")
+                        .setStyle(ButtonStyle.Primary),
+                    new ButtonBuilder()
+                        .setCustomId("medusa:button:template:secondary:action")
+                        .setLabel("Secondary")
+                        .setStyle(ButtonStyle.Secondary),
+                    new ButtonBuilder()
+                        .setCustomId("medusa:button:template:success:action")
+                        .setLabel("Confirm")
+                        .setStyle(ButtonStyle.Success),
+                    new ButtonBuilder()
+                        .setCustomId("medusa:button:template:danger:action")
+                        .setLabel("Delete")
+                        .setStyle(ButtonStyle.Danger),
+                    new ButtonBuilder()
+                        .setLabel("Documentation")
+                        .setStyle(ButtonStyle.Link)
+                        .setURL("https://zerodev.ca")
+                );
+
+                const selectRow = new ActionRowBuilder().addComponents(
+                    new StringSelectMenuBuilder()
+                        .setCustomId("medusa:select_menu:template:category:filter")
+                        .setPlaceholder("Select a category filter")
+                        .addOptions([
+                            { label: "Bundles", value: "bundles", description: "All bundle packages" },
+                            { label: "Membership", value: "membership", description: "VIP and tier memberships" },
+                            { label: "Cosmetics", value: "cosmetics", description: "Visual items and trail effects" },
+                            { label: "Boosters", value: "boosters", description: "XP and currency boosters" }
+                        ])
+                );
+
+                const channelRow = new ActionRowBuilder().addComponents(
+                    new ChannelSelectMenuBuilder()
+                        .setCustomId("medusa:select_menu:template:channel:notification")
+                        .setPlaceholder("Select a notification channel")
+                        .addChannelTypes(ChannelType.GuildText)
+                );
+
+                return interaction.editReply({
+                    embeds: [
+                        this.medusa.embeds.default({
+                            title: "Discord UI Components Showcase",
+                            description: "Demonstration of interactive Discord message buttons, select menus, and channel selectors managed by the template module."
+                        })
+                    ],
+                    components: [buttonRow, selectRow, channelRow]
+                });
             }
             default:
                 return interaction.editReply({

@@ -9,7 +9,7 @@ export class TemplatePage extends Pages {
             icon: "box",
             group: "Modules",
             order: 1,
-            component: "records",
+            component: "template",
             config: {
                 endpoint: "/items"
             }
