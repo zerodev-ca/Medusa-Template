@@ -1,0 +1,7 @@
+{
+  "name": "@medusa-modules/template",
+  "version": "1.0.0.0",
+  "description": "Official module template for creating custom Medusa modules.",
+  "type": "module",
+  "main": "main.js"
+}

@@ -1,0 +1,182 @@
+{
+  "de": {
+    "messages": {
+      "created": "Element **%name%** wurde erfolgreich erstellt.",
+      "deleted": "Element **%identifier%** wurde erfolgreich gelöscht.",
+      "notFound": "Element **%identifier%** wurde nicht gefunden.",
+      "successEmbed": {
+        "title": "Operation Erfolgreich",
+        "description": "%custom_emoji_check% • Vorgang für **%user%** abgeschlossen.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "es-ES": {
+    "messages": {
+      "created": "Artículo **%name%** creado con éxito.",
+      "deleted": "Artículo **%identifier%** eliminado con éxito.",
+      "notFound": "El artículo **%identifier%** no fue encontrado.",
+      "successEmbed": {
+        "title": "Operación Exitosa",
+        "description": "%custom_emoji_check% • Operación completada para **%user%**.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "fr": {
+    "messages": {
+      "created": "L'article **%name%** a été créé avec succès.",
+      "deleted": "L'article **%identifier%** a été supprimé avec succès.",
+      "notFound": "L'article **%identifier%** est introuvable.",
+      "successEmbed": {
+        "title": "Opération Réussie",
+        "description": "%custom_emoji_check% • Opération terminée pour **%user%**.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "it": {
+    "messages": {
+      "created": "Elemento **%name%** creato con successo.",
+      "deleted": "Elemento **%identifier%** eliminato con successo.",
+      "notFound": "Elemento **%identifier%** non trovato.",
+      "successEmbed": {
+        "title": "Operazione Riuscita",
+        "description": "%custom_emoji_check% • Operazione completata per **%user%**.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "ja": {
+    "messages": {
+      "created": "アイテム **%name%** が正常に作成されました。",
+      "deleted": "アイテム **%identifier%** が正常に削除されました。",
+      "notFound": "アイテム **%identifier%** が見つかりませんでした。",
+      "successEmbed": {
+        "title": "操作成功",
+        "description": "%custom_emoji_check% • **%user%** の操作が完了しました。",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "ko": {
+    "messages": {
+      "created": "**%name%** 아이템이 생성되었습니다.",
+      "deleted": "**%identifier%** 아이템이 삭제되었습니다.",
+      "notFound": "**%identifier%** 아이템을 찾을 수 없습니다.",
+      "successEmbed": {
+        "title": "작업 성공",
+        "description": "%custom_emoji_check% • **%user%** 님의 작업이 완료되었습니다.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "nl": {
+    "messages": {
+      "created": "Item **%name%** succesvol aangemaakt.",
+      "deleted": "Item **%identifier%** succesvol verwijderd.",
+      "notFound": "Item **%identifier%** is niet gevonden.",
+      "successEmbed": {
+        "title": "Bewerking Geslaagd",
+        "description": "%custom_emoji_check% • Bewerking voltooid voor **%user%**.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "pl": {
+    "messages": {
+      "created": "Pomyślnie utworzono element **%name%**.",
+      "deleted": "Pomyślnie usunięto element **%identifier%**.",
+      "notFound": "Nie znaleziono elementu **%identifier%**.",
+      "successEmbed": {
+        "title": "Operacja Udana",
+        "description": "%custom_emoji_check% • Operacja zakończona dla **%user%**.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "pt-BR": {
+    "messages": {
+      "created": "Item **%name%** criado com sucesso.",
+      "deleted": "Item **%identifier%** excluído com sucesso.",
+      "notFound": "Item **%identifier%** não encontrado.",
+      "successEmbed": {
+        "title": "Operação Concluída",
+        "description": "%custom_emoji_check% • Operação concluída para **%user%**.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "ru": {
+    "messages": {
+      "created": "Элемент **%name%** успешно создан.",
+      "deleted": "Элемент **%identifier%** успешно удален.",
+      "notFound": "Элемент **%identifier%** не найден.",
+      "successEmbed": {
+        "title": "Операция Успешна",
+        "description": "%custom_emoji_check% • Операция выполнена для **%user%**.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "sv-SE": {
+    "messages": {
+      "created": "Objektet **%name%** har skapats.",
+      "deleted": "Objektet **%identifier%** har tagits bort.",
+      "notFound": "Objektet **%identifier%** hittades inte.",
+      "successEmbed": {
+        "title": "Åtgärden Lyckades",
+        "description": "%custom_emoji_check% • Åtgärden slutfördes för **%user%**.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "tr": {
+    "messages": {
+      "created": "**%name%** öğesi başarıyla oluşturuldu.",
+      "deleted": "**%identifier%** öğesi başarıyla silindi.",
+      "notFound": "**%identifier%** öğesi bulunamadı.",
+      "successEmbed": {
+        "title": "İşlem Başarılı",
+        "description": "%custom_emoji_check% • **%user%** için işlem tamamlandı.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "uk": {
+    "messages": {
+      "created": "Елемент **%name%** успішно створено.",
+      "deleted": "Елемент **%identifier%** успішно видалено.",
+      "notFound": "Елемент **%identifier%** не знайдено.",
+      "successEmbed": {
+        "title": "Операція Успішна",
+        "description": "%custom_emoji_check% • Операцію завершено для **%user%**.",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "zh-CN": {
+    "messages": {
+      "created": "已成功创建项目 **%name%**。",
+      "deleted": "已成功删除项目 **%identifier%**。",
+      "notFound": "未找到项目 **%identifier%**。",
+      "successEmbed": {
+        "title": "操作成功",
+        "description": "%custom_emoji_check% • 已为 **%user%** 完成操作。",
+        "color": "#22c55e"
+      }
+    }
+  },
+  "zh-TW": {
+    "messages": {
+      "created": "已成功建立項目 **%name%**。",
+      "deleted": "已成功刪除項目 **%identifier%**。",
+      "notFound": "找不到項目 **%identifier%**。",
+      "successEmbed": {
+        "title": "操作成功",
+        "description": "%custom_emoji_check% • 已為 **%user%** 完成操作。",
+        "color": "#22c55e"
+      }
+    }
+  }
+}
