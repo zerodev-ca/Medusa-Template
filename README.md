@@ -26,9 +26,8 @@ git worktree add modules/my-module -b module/my-module
 ### 2. Rename the Module
 
 1. **`main.js`**: Update the `name` passed to `super()` to match your lowercase folder name.
-2. **`package.json`**: Update the package `name` field.
-3. **`resources/lang/*/common.json`**: Update `"module.<name>.name"` across all 16 locales with your capitalized display name.
-4. **Subsystems**: Rename classes, models, and tables to fit your feature domain.
+2. **`resources/lang/*/common.json`**: Update `"module.<name>.name"` across all 16 locales with your capitalized display name.
+3. **Subsystems**: Rename classes, models, and tables to fit your feature domain.
 
 ---
 
@@ -37,7 +36,6 @@ git worktree add modules/my-module -b module/my-module
 ```text
 modules/my-module/
 ├── main.js                      # Module entrypoint extending Modules
-├── package.json                 # Module package metadata
 ├── README.md                    # Developer guide
 ├── resources/
 │   ├── config/                  # Dashboard configuration schemas (Configs)
