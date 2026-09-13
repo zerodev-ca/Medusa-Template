@@ -230,20 +230,6 @@ if (interaction.isButton()) {
 
 ---
 
-## Architecture Rules
-
-When developing official or commercial Medusa modules, follow these architecture standards:
-
-1. **No comments in code**: Write clean, self-describing code without inline comments.
-2. **Strict architecture**: Place business logic in `handlers/`, database queries in `models/`, and interactions in `commands/` or `routes/`.
-3. **No optionals or fallbacks**: Avoid optional chaining (`?.`), nullish coalescing (`??`), and logical OR value fallbacks (`||`). Use explicit condition checks.
-4. **All 16 languages supported**: Provide translation dictionaries across `en`, `fr`, `es-ES`, `de`, `pt-BR`, `it`, `nl`, `pl`, `ru`, `uk`, `tr`, `sv-SE`, `ja`, `ko`, `zh-CN`, and `zh-TW`.
-5. **No plain text messages**: Use internal embed templates (`this.medusa.embeds.success()`, `this.medusa.embeds.error()`, `this.medusa.embeds.warn()`).
-6. **Hex colors only**: Always specify embed and theme colors as hex strings (e.g. `"#22c55e"`).
-7. **Clean commits**: Commit all changes atomically with clear, conventional commit messages without co-author tags.
-
----
-
 ## Documentation
 
 Full developer documentation and internal API specifications are available at:
