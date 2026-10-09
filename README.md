@@ -2,7 +2,7 @@
 
 The official module starter template for [Medusa](https://zerodev.ca), developed by Zero Development.
 
-This repository provides a production-ready, batteries-included template for building custom Medusa modules. It demonstrates every subsystem, including database models, Discord commands, HTTP API routes, background clocks, dashboard schemas, audit logging, multi-language localization, automation flow nodes, leaderboard providers, custom React dashboard views, live config previews, and interactive Discord components.
+This repository provides a production-ready, batteries-included template for building custom Medusa modules. It demonstrates core subsystems, including database models, Discord commands, HTTP API routes, background clocks, dashboard schemas, audit logging, multi-language localization, automation flow nodes, leaderboard providers, bespoke React dashboard views, and interactive Discord components.
 
 ---
 
@@ -39,17 +39,12 @@ modules/my-module/
 ├── README.md                    # Developer guide
 ├── resources/
 │   ├── config/                  # Dashboard configuration schemas (Configs)
-│   │   └── settings.js          # All 15 field types + live preview link
-│   ├── dashboard/               # Custom dashboard views and previews
-│   │   ├── pages/
-│   │   │   └── template/
-│   │   │       ├── page.js      # Page manifest class extending Pages
-│   │   │       ├── loader.ts    # Server-side Next.js data loader
-│   │   │       └── view.tsx     # Rich React client component with Mantine/Tailwind UI
-│   │   └── previews/
-│   │       └── template.tsx     # Live interactive configuration preview
-│   ├── docs/                    # In-dashboard markdown documentation
-│   │   └── index.md
+│   │   └── settings.js          # Supported field types, groups, and options
+│   ├── dashboard/               # Custom dashboard views and pages
+│   │   └── pages/
+│   │       └── template/
+│   │           ├── page.js      # Page manifest class extending Pages with load()
+│   │           └── view.tsx     # Rich React client component with Mantine/Tailwind UI
 │   ├── lang/                    # Multilingual dictionaries for all 16 locales
 │   │   ├── en/
 │   │   │   ├── common.json      # Capitalized display name
@@ -66,7 +61,7 @@ modules/my-module/
     ├── clocks/                  # Scheduled background cron jobs (Clocks)
     │   └── cleanup.js
     ├── commands/                # Discord slash and prefix commands (Commands)
-    │   └── template.js          # Slash commands, options, autocomplete, and UI components
+    │   └── template.js          # Slash commands, options, and UI components
     ├── events/                  # Discord gateway event listeners (Events)
     │   ├── messageCreate.js
     │   └── interactionCreate.js # Discord button, select menu, and modal handler
@@ -83,7 +78,7 @@ modules/my-module/
 
 ## Custom Dashboard Components (`resources/dashboard/`)
 
-Modules can provide fully bespoke React dashboard pages mounted directly inside Medusa's Next.js dashboard shell.
+Modules can provide bespoke React dashboard pages mounted directly inside Medusa's dashboard shell.
 
 ### 1. Page Registration (`page.js`)
 
@@ -105,36 +100,24 @@ export class TemplatePage extends Pages {
             }
         });
     }
+
+    async load({ client }) {
+        try {
+            const items = await client.send("GET", "/api/modules/template/items");
+            return { available: true, data: { items } };
+        } catch {
+            return { available: true, data: { items: [] } };
+        }
+    }
 }
 ```
 
-### 2. Server Data Loader (`loader.ts`)
-
-```ts
-import type { ModuleLoader } from "@/components/pages/types";
-import { medusa } from "@/lib/medusa";
-
-const loader: ModuleLoader = async (module) => {
-    try {
-        const data = await medusa.moduleData(module, "/items");
-        return { available: true, data };
-    } catch {
-        return {
-            available: true,
-            data: { items: [], stats: { total: 0, active: 0, categories: 0 } }
-        };
-    }
-};
-
-export default loader;
-```
-
-### 3. Client View Component (`view.tsx`)
+### 2. Client View Component (`view.tsx`)
 
 Bespoke views import official design system components directly from `@/components/ui/*`:
 
 - `Button` (`@/components/ui/button`): Supports variants (`default`, `secondary`, `outline`, `destructive`, `ghost`) and sizes (`sm`, `default`, `lg`, `icon`).
-- `Select` (`@/components/ui/select`): Dropdown select menus with value bindings and placeholder states.
+- `Select` (`@/components/ui/select`): Dropdown select menus with value bindings.
 - `Input` (`@/components/ui/input`): Text, numeric, and search inputs.
 - `Switch` (`@/components/ui/switch`): Boolean toggles.
 - `Badge` (`@/components/ui/badge`): Semantic status tags.
@@ -143,44 +126,13 @@ Bespoke views import official design system components directly from `@/componen
 
 ---
 
-## Live Configuration Previews (`previews/`)
-
-Link any configuration group in `Configs` to a live interactive preview component using `preview: "<id>"`:
-
-```js
-export class SettingsConfig extends Configs {
-    constructor(medusa) {
-        super(medusa, {
-            name: "settings",
-            label: "Template Settings",
-            description: "Manage core module settings.",
-            preview: "template"
-        });
-    }
-}
-```
-
-The preview component at `resources/dashboard/previews/template.tsx` receives live form values:
-
-```tsx
-import type { PreviewProps } from "@/components/pages/types";
-
-export default function TemplateConfigPreview({ values, user }: PreviewProps) {
-    return (
-        <div>...</div>
-    );
-}
-```
-
----
-
 ## Supported Configuration Field Types
 
-The `resources/config/settings.js` file demonstrates all 15 configuration field types supported by Medusa:
+The `resources/config/settings.js` file demonstrates configuration field types supported by Medusa:
 
 1. `boolean`: Switch toggle.
 2. `string`: Single-line text input.
-3. `text`: Multi-line textarea with emoji picker support.
+3. `text`: Multi-line textarea.
 4. `number`: Numeric input with step controls.
 5. `select`: Dropdown select menu with static `options` or dynamic `source`.
 6. `color`: Hex color picker.
@@ -220,8 +172,7 @@ if (interaction.isButton()) {
     const action = interaction.customIdParsed.name;
     switch (action) {
         case "primary":
-            return interaction.reply({ embeds: [...], flags: MessageFlags.Ephemeral });
-        ...
+            return interaction.reply({ embeds: [this.medusa.embeds.info("Action triggered.")], flags: MessageFlags.Ephemeral });
     }
 }
 ```
@@ -232,5 +183,3 @@ if (interaction.isButton()) {
 
 Full developer documentation and internal API specifications are available at:
 [https://zerodev.ca/docs/medusa/developer-documentation](https://zerodev.ca/docs/medusa/developer-documentation)
-
-NOTE: This module template was created by ai, if there are any mistakes; please report them in our Discord server! Thanks a bunch.

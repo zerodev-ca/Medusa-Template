@@ -5,8 +5,7 @@ export class SettingsConfig extends Configs {
         super(medusa, {
             name: "settings",
             label: "Template Settings",
-            description: "Manage core module settings and interactive options.",
-            preview: "template"
+            description: "Manage core module settings and interactive options."
         });
     }
 

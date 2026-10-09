@@ -15,4 +15,23 @@ export class TemplatePage extends Pages {
             }
         });
     }
+
+    async load({ client }) {
+        try {
+            const items = await client.send("GET", "/api/modules/template/items");
+            return {
+                available: true,
+                data: {
+                    items: Array.isArray(items) ? items : []
+                }
+            };
+        } catch {
+            return {
+                available: true,
+                data: {
+                    items: []
+                }
+            };
+        }
+    }
 }
